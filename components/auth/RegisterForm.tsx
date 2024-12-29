@@ -5,7 +5,6 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { RegisterSchema } from "@/schema";
 import {
   Form,
   FormControl,
@@ -20,6 +19,7 @@ import { Button } from "../ui/button";
 import { FormError } from "../FormError";
 import { FormSuccess } from "../FormSuccess";
 
+import { RegisterSchema } from "@/schema";
 import { Register } from "@/actions/register";
 
 const LoginForm = () => {

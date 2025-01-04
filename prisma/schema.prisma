@@ -8,7 +8,7 @@ generator client {
     provider = "prisma-client-js"
 }
 
-enum USerRole {
+enum UserRole {
     USER
     ADMIN
 }
@@ -20,8 +20,11 @@ model User {
     emailVerified DateTime?
     image         String?
     password      String?
-    role          USerRole  @default(USER)
+    role          UserRole  @default(USER)
     accounts      Account[]
+
+    isTwoFactorEnabled    Boolean                @default(false)
+    twoFactorConfirmation TwoFactorConfirmation?
 }
 
 model Account {
@@ -59,4 +62,22 @@ model PasswordResetToken {
     expires DateTime
 
     @@unique([email, token])
+}
+
+model TwoFactorToken {
+    id      String   @id @default(cuid())
+    email   String
+    token   String   @unique
+    expires DateTime
+
+    @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+    id String @id @default(cuid())
+
+    userId String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId])
 }

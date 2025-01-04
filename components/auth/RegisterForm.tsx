@@ -22,7 +22,7 @@ import { FormSuccess } from "../FormSuccess";
 import { RegisterSchema } from "@/schema";
 import { Register } from "@/actions/register";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransiton] = useTransition();
@@ -120,4 +120,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

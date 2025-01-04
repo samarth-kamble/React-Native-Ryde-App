@@ -80,3 +80,34 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
     </div>`,
   });
 };
+
+export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
+  await transporter.sendMail({
+    from: `"My Tools" <${process.env.SMTP_MAIL}>`, // Sender address
+    to: email, // List of recipients
+    subject: 'Two-Factor Authentication Code', // Subject line
+    html: ` <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="https://your-app-url.com/logo.png" alt="My Tools" style="width: 100px; height: auto;" />
+      </div>
+      <h2 style="color: #2C3E50; text-align: center;">Your 2FA Code</h2>
+      <p style="font-size: 16px; text-align: center; color: #555;">
+        Hi there, <br />
+        To complete your login, please use the following 2FA (Two-Factor Authentication) code:
+      </p>
+      <div style="text-align: center; margin: 20px 0;">
+        <p style="display: inline-block; background-color: #3498DB; color: #fff; font-size: 24px; font-weight: bold; padding: 10px 20px; border-radius: 6px;">
+          ${token}
+        </p>
+      </div>
+      <p style="font-size: 14px; text-align: center; color: #666;">
+        This code is valid for 10 minutes. If you didn’t request this, please ignore this email or contact our support team.
+      </p>
+      <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
+      <p style="font-size: 12px; text-align: center; color: #999;">
+        This email was sent by My Tools. For support, please contact us at 
+        <a href="mailto:support@my-tools.ai" style="color: #3498DB;">support@my-tools.ai</a>.
+      </p>
+    </div>`, 
+  });
+};

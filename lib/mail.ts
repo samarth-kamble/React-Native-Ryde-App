@@ -46,3 +46,37 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     </div>`,
   });
 };
+
+export const sendPasswordResetEmail = async (email: string, token: string) => {
+  const resetLink = `${domain}/auth/new-password?token=${token}`;
+
+  await transporter.sendMail({
+    from: `"My Tools" <${process.env.SMTP_MAIL}>`,
+    to: email,
+    subject: "Reset your password",
+    html: `
+<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="https://your-app-url.com/logo.png" alt="My Tools" style="width: 100px; height: auto;" />
+      </div>
+      <h2 style="color: #007BFF; text-align: center;">Reset Your Password</h2>
+      <p style="font-size: 16px; text-align: center;">
+        Hi there, <br />
+        We received a request to reset your password. Click the button below to reset it.
+      </p>
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="${resetLink}" style="display: inline-block; background-color: #007BFF; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: bold;">
+          Reset Password
+        </a>
+      </div>
+      <p style="font-size: 14px; text-align: center; color: #666;">
+        If you did not request a password reset, you can safely ignore this email. The reset link will expire in 30 minutes.
+      </p>
+      <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
+      <p style="font-size: 12px; text-align: center; color: #999;">
+        This email was sent by My Tools. For support, please contact us at
+        <a href="mailto:support@my-tools.ai" style="color: #007BFF;">support@my-tools.ai</a>.
+      </p>
+    </div>`,
+  });
+};

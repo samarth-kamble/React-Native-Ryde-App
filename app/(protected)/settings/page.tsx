@@ -2,12 +2,11 @@
 
 import React from "react";
 
-import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
 import { logout } from "@/actions/logout";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const SettingsPage = () => {
-  const session = useSession();
+  const user = useCurrentUser();
 
   const onClick = () => {
     logout();
@@ -15,12 +14,7 @@ const SettingsPage = () => {
 
   return (
     <div>
-      SettingsPage: {JSON.stringify(session)}
-      <form>
-        <button type="submit" onClick={onClick}>
-          Sign Out
-        </button>
-      </form>
+      <h1 className="text-3xl font-semibold">Settings</h1>
     </div>
   );
 };

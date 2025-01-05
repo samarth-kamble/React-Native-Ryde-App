@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from "crypto";
 import { v4 as uuid4 } from "uuid";
 
 import { db } from "./db";
@@ -30,7 +30,6 @@ export const generateTwoFactorToken = async (email: string) => {
 
   return twoFactorToken;
 };
-
 
 export const generatePasswordResetToken = async (email: string) => {
   const token = uuid4();

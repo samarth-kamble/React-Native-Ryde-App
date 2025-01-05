@@ -1,21 +1,25 @@
+"use client";
+
 import React from "react";
 
-import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
+import { logout } from "@/actions/logout";
 
-const SettingsPage = async () => {
-  const session = await auth();
+const SettingsPage = () => {
+  const session = useSession();
+
+  const onClick = () => {
+    logout();
+  };
 
   return (
     <div>
       SettingsPage: {JSON.stringify(session)}
-      <form
-        action={async () => {
-          "use server";
-          await signOut();
-        }}
-      >
-        <Button type="submit">Sign Out</Button>
+      <form>
+        <button type="submit" onClick={onClick}>
+          Sign Out
+        </button>
       </form>
     </div>
   );
